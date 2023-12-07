@@ -1,13 +1,27 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title></title>
+    <title>Quiz Site</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>Welcome to my Awesome Quiz!</h1>
+    <div class="container">
+      <h1>Welcome to my Awesome Quiz!</h1>
+      <div class="question">
+        <p>Question 1: What is the capital of France?</p>
+        <input type="radio" id="ans1" name="q1" value="paris" />
+        <label for="paris">ans1</label><br />
+        <input type="radio" id="ans2" name="q1" value="london" />
+        <label for="london">ans2</label><br />
+        <input type="radio" id="ans3" name="q1" value="rome" />
+        <label for="rome">ans3</label>
+        <input type="radio" id="ans4" name="q1" value="rome" />
+        <label for="rome">ans4</label>
+      </div>
+      <button type="submit">Submit Quiz</button>
+    </div>
   </body>
   <script src="js/logic.js"></script>
 </html>
