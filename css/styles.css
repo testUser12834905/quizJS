@@ -32,3 +32,17 @@ button {
   border: none;
   border-radius: 4px;
 }
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
