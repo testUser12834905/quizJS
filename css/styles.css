@@ -18,7 +18,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.content { margin: 20px 0;
+.content {
+  margin: 20px 0;
 }
 
 button {
@@ -47,6 +48,7 @@ button {
   padding: 5px;
   border: 1px solid #ddd;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .option input[type="radio"] {
@@ -55,10 +57,11 @@ button {
 
 .option label {
   width: 100%;
+  border-radius: 3px;
 }
 
 .option input[type="radio"]:checked + label {
-  background-color: orange;
+  background-color: #ffc26e;
 }
 
 input[type="radio"] {
