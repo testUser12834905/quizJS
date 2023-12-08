@@ -30,6 +30,7 @@ class Quiz {
     }
     this.currentQuestionIndex++;
     this.updateUI();
+    console.log(this.score);
   }
 
   updateUI() {
@@ -128,10 +129,20 @@ const questions = [
 
 const quiz = new Quiz(questions);
 
+const STARTQUIZ = "Start Quiz";
 document.addEventListener("DOMContentLoaded", function () {
-  const submitButton = document.getElementById("submit");
+  const submitButton = document.getElementById("submitQuestion");
+  submitButton.textContent = STARTQUIZ;
 
   submitButton.addEventListener("click", function () {
-    quiz.guess("hello world");
+    if (submitButton.textContent === STARTQUIZ) {
+      submitButton.textContent = "Submit Answer";
+      quiz.updateUI();
+    }
+    const options = document.querySelectorAll("input:checked");
+
+    let selectedAnswer = options.length > 0 ? options[0].value : null;
+
+    selectedAnswer ? quiz.guess(selectedAnswer) : null;
   });
 });

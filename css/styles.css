@@ -65,3 +65,7 @@ button {
 input[type="radio"] {
   margin-right: 5px;
 }
+
+#result {
+  display: none;
+}
