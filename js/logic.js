@@ -1,14 +1,57 @@
+function createOptionElement(answer, index) {
+  const optionDiv = document.createElement("div");
+  optionDiv.className = "option";
+
+  const input = document.createElement("input");
+  input.type = "radio";
+  input.id = `ans${index}`;
+  input.value = answer;
+
+  const label = document.createElement("label");
+  label.htmlFor = input.id;
+  label.textContent = answer;
+
+  optionDiv.appendChild(input);
+  optionDiv.appendChild(label);
+
+  console.log(optionDiv);
+  return optionDiv;
+}
+
 class Quiz {
   constructor(questions) {
     this.score = 0;
     this.questions = questions;
     this.currentQuestionIndex = 0;
   }
+
   guess(answer) {
-    if (this.getCurrentQuestion().isCorrectAnswer(answer)) {
+    if (this.isCorrectAnswer(answer)) {
       this.score++;
     }
     this.currentQuestionIndex++;
+    this.updateUI();
+  }
+
+  updateUI() {
+    const optionsGrid = document.querySelector(".options-grid");
+    optionsGrid.innerHTML = "";
+
+    const currentQuestion = this.getCurrentQuestion();
+
+    const questionElement = document.querySelector("#question > p");
+    questionElement.textContent = currentQuestion.question;
+
+    currentQuestion.answers.forEach((answer, index) => {
+      optionsGrid.appendChild(createOptionElement(answer, index));
+    });
+  }
+
+  isCorrectAnswer(answer) {
+    const currentQuestion = this.getCurrentQuestion();
+    return (
+      answer === currentQuestion.answers[currentQuestion.indexOfCorrectAns]
+    );
   }
 
   getCurrentQuestion() {
@@ -84,11 +127,12 @@ const questions = [
   },
 ];
 
+const quiz = new Quiz(questions);
+
 document.addEventListener("DOMContentLoaded", function () {
-  const question = document.getElementById("question");
   const submitButton = document.getElementById("submit");
 
   submitButton.addEventListener("click", function () {
-    console.log(questions);
+    quiz.guess("hello world");
   });
 });
