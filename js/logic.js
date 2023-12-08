@@ -54,9 +54,10 @@ class Quiz {
     if (this.hasEnded()) {
       const resultElement = document.getElementById("result");
       resultElement.style.display = "block";
+      resultElement.textContent = `Your score is ${this.score}`;
 
-      const ruestionElement = document.getElementById("question");
-      ruestionElement.style.display = "none";
+      const questionElement = document.getElementById("question");
+      questionElement.style.display = "none";
 
       const submitButton = document.getElementById("submitQuestion");
       submitButton.textContent = RESTART_QUIZ;
