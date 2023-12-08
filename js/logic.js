@@ -14,7 +14,6 @@ function createOptionElement(answer, index) {
   optionDiv.appendChild(input);
   optionDiv.appendChild(label);
 
-  console.log(optionDiv);
   return optionDiv;
 }
 
