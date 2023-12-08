@@ -30,7 +30,14 @@ class Quiz {
   }
 
   start() {
+    const resultElement = document.getElementById("result");
+    resultElement.style.display = "none";
+
+    const ruestionElement = document.getElementById("question");
+    ruestionElement.style.display = "block";
+
     this.score = 0;
+    this.currentQuestionIndex = 0;
     this.updateUI();
   }
 
@@ -155,9 +162,12 @@ document.addEventListener("DOMContentLoaded", function () {
   submitButton.textContent = START_QUIZ;
 
   submitButton.addEventListener("click", function () {
-    if (submitButton.textContent === START_QUIZ) {
+    if (
+      submitButton.textContent === START_QUIZ ||
+      submitButton.textContent === RESTART_QUIZ
+    ) {
       submitButton.textContent = SUBMIT_ANSWER;
-      quiz.start(submitButton.textContent);
+      quiz.start();
     }
 
     const options = document.querySelectorAll("input:checked");
