@@ -1,3 +1,7 @@
+const START_QUIZ = "Start Quiz";
+const RESTART_QUIZ = "Restart Quiz";
+const SUBMIT_ANSWER = "Submit Answer";
+
 function createOptionElement(answer, index) {
   const optionDiv = document.createElement("div");
   optionDiv.className = "option";
@@ -25,27 +29,43 @@ class Quiz {
     this.currentQuestionIndex = 0;
   }
 
+  start() {
+    this.score = 0;
+    this.updateUI();
+  }
+
   guess(answer) {
     if (this.isCorrectAnswer(answer)) {
       this.score++;
     }
     this.currentQuestionIndex++;
-    this.updateUI();
     console.log(this.score);
+    this.updateUI();
   }
 
   updateUI() {
-    const optionsGrid = document.querySelector(".options-grid");
-    optionsGrid.innerHTML = "";
+    if (this.hasEnded()) {
+      const resultElement = document.getElementById("result");
+      resultElement.style.display = "block";
 
-    const currentQuestion = this.getCurrentQuestion();
+      const ruestionElement = document.getElementById("question");
+      ruestionElement.style.display = "none";
 
-    const questionElement = document.querySelector("#question > p");
-    questionElement.textContent = currentQuestion.question;
+      const submitButton = document.getElementById("submitQuestion");
+      submitButton.textContent = RESTART_QUIZ;
+    } else {
+      const optionsGrid = document.querySelector(".options-grid");
+      optionsGrid.innerHTML = "";
 
-    currentQuestion.answers.forEach((answer, index) => {
-      optionsGrid.appendChild(createOptionElement(answer, index));
-    });
+      const currentQuestion = this.getCurrentQuestion();
+
+      const questionElement = document.querySelector("#question > p");
+      questionElement.textContent = currentQuestion.question;
+
+      currentQuestion.answers.forEach((answer, index) => {
+        optionsGrid.appendChild(createOptionElement(answer, index));
+      });
+    }
   }
 
   isCorrectAnswer(answer) {
@@ -80,67 +100,64 @@ const questions = [
     ],
     indexOfCorrectAns: 2,
   },
-  {
-    question: "Which planet is known as the Red Planet?",
-    answers: ["Earth", "Mars", "Jupiter", "Venus"],
-    indexOfCorrectAns: 1,
-  },
-  {
-    question: "What is the largest ocean on Earth?",
-    answers: ["Atlantic", "Indian", "Pacific", "Arctic"],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question: "In which year did the Titanic sink?",
-    answers: ["1912", "1915", "1920", "1905"],
-    indexOfCorrectAns: 0,
-  },
-  {
-    question: "What is the chemical symbol for water?",
-    answers: ["O2", "H2O", "CO2", "NaCl"],
-    indexOfCorrectAns: 1,
-  },
-  {
-    question: "How many continents are there on Earth?",
-    answers: ["Five", "Six", "Seven", "Eight"],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question: "Who painted the Mona Lisa?",
-    answers: [
-      "Vincent Van Gogh",
-      "Pablo Picasso",
-      "Leonardo da Vinci",
-      "Michelangelo",
-    ],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question:
-      "Which gas do plants absorb from the atmosphere during photosynthesis?",
-    answers: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question: "What is the capital of Japan?",
-    answers: ["Seoul", "Beijing", "Tokyo", "Bangkok"],
-    indexOfCorrectAns: 2,
-  },
+  // {
+  //   question: "Which planet is known as the Red Planet?",
+  //   answers: ["Earth", "Mars", "Jupiter", "Venus"],
+  //   indexOfCorrectAns: 1,
+  // },
+  // {
+  //   question: "What is the largest ocean on Earth?",
+  //   answers: ["Atlantic", "Indian", "Pacific", "Arctic"],
+  //   indexOfCorrectAns: 2,
+  // },
+  // {
+  //   question: "In which year did the Titanic sink?",
+  //   answers: ["1912", "1915", "1920", "1905"],
+  //   indexOfCorrectAns: 0,
+  // },
+  // {
+  //   question: "What is the chemical symbol for water?",
+  //   answers: ["O2", "H2O", "CO2", "NaCl"],
+  //   indexOfCorrectAns: 1,
+  // },
+  // {
+  //   question: "How many continents are there on Earth?",
+  //   answers: ["Five", "Six", "Seven", "Eight"],
+  //   indexOfCorrectAns: 2,
+  // },
+  // {
+  //   question: "Who painted the Mona Lisa?",
+  //   answers: [
+  //     "Vincent Van Gogh",
+  //     "Pablo Picasso",
+  //     "Leonardo da Vinci",
+  //     "Michelangelo",
+  //   ],
+  //   indexOfCorrectAns: 2,
+  // },
+  // {
+  //   question:
+  //     "Which gas do plants absorb from the atmosphere during photosynthesis?",
+  //   answers: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+  //   indexOfCorrectAns: 2,
+  // },
+  // {
+  //   question: "What is the capital of Japan?",
+  //   answers: ["Seoul", "Beijing", "Tokyo", "Bangkok"],
+  //   indexOfCorrectAns: 2,
+  // },
 ];
 
 const quiz = new Quiz(questions);
 
-const STARTQUIZ = "Start Quiz";
-const SUBMITANS = "Submit Answer";
-
 document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("submitQuestion");
-  submitButton.textContent = STARTQUIZ;
+  submitButton.textContent = START_QUIZ;
 
   submitButton.addEventListener("click", function () {
-    if (submitButton.textContent === STARTQUIZ) {
-      submitButton.textContent = SUBMITANS;
-      quiz.updateUI();
+    if (submitButton.textContent === START_QUIZ) {
+      submitButton.textContent = SUBMIT_ANSWER;
+      quiz.start(submitButton.textContent);
     }
 
     const options = document.querySelectorAll("input:checked");
