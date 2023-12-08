@@ -6,6 +6,7 @@ function createOptionElement(answer, index) {
   input.type = "radio";
   input.id = `ans${index}`;
   input.value = answer;
+  input.name = "answer";
 
   const label = document.createElement("label");
   label.htmlFor = input.id;
@@ -130,15 +131,18 @@ const questions = [
 const quiz = new Quiz(questions);
 
 const STARTQUIZ = "Start Quiz";
+const SUBMITANS = "Submit Answer";
+
 document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("submitQuestion");
   submitButton.textContent = STARTQUIZ;
 
   submitButton.addEventListener("click", function () {
     if (submitButton.textContent === STARTQUIZ) {
-      submitButton.textContent = "Submit Answer";
+      submitButton.textContent = SUBMITANS;
       quiz.updateUI();
     }
+
     const options = document.querySelectorAll("input:checked");
 
     let selectedAnswer = options.length > 0 ? options[0].value : null;
