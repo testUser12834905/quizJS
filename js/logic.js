@@ -19,3 +19,12 @@ class Quiz {
     return this.currentQuestionIndex >= this.questions.length;
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const question = document.getElementById("question");
+  const submitButton = document.getElementById("submit");
+
+  submitButton.addEventListener("click", function () {
+    console.log("hello world");
+  });
+});
