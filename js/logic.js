@@ -77,7 +77,7 @@ class Quiz {
       currentQuestionTracker.textContent = `${this.currentQuestionIndex + 1}/${
         this.questions.length
       }`;
-      optionsGrid.append(currentQuestionTracker);
+      optionsGrid.appendChild(currentQuestionTracker);
     }
   }
 
