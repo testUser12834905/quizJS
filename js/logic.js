@@ -73,6 +73,11 @@ class Quiz {
       currentQuestion.answers.forEach((answer, index) => {
         optionsGrid.appendChild(createOptionElement(answer, index));
       });
+      const currentQuestionTracker = document.createElement("p");
+      currentQuestionTracker.textContent = `${this.currentQuestionIndex + 1}/${
+        this.questions.length
+      }`;
+      optionsGrid.append(currentQuestionTracker);
     }
   }
 
