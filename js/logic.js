@@ -54,7 +54,7 @@ class Quiz {
     if (this.hasEnded()) {
       const resultElement = document.getElementById("result");
       resultElement.style.display = "block";
-      resultElement.textContent = `Your score is ${this.score}`;
+      resultElement.textContent = `Your score is: ${this.score}`;
 
       const questionElement = document.getElementById("question");
       questionElement.style.display = "none";
@@ -108,52 +108,52 @@ const questions = [
     ],
     indexOfCorrectAns: 2,
   },
-  // {
-  //   question: "Which planet is known as the Red Planet?",
-  //   answers: ["Earth", "Mars", "Jupiter", "Venus"],
-  //   indexOfCorrectAns: 1,
-  // },
-  // {
-  //   question: "What is the largest ocean on Earth?",
-  //   answers: ["Atlantic", "Indian", "Pacific", "Arctic"],
-  //   indexOfCorrectAns: 2,
-  // },
-  // {
-  //   question: "In which year did the Titanic sink?",
-  //   answers: ["1912", "1915", "1920", "1905"],
-  //   indexOfCorrectAns: 0,
-  // },
-  // {
-  //   question: "What is the chemical symbol for water?",
-  //   answers: ["O2", "H2O", "CO2", "NaCl"],
-  //   indexOfCorrectAns: 1,
-  // },
-  // {
-  //   question: "How many continents are there on Earth?",
-  //   answers: ["Five", "Six", "Seven", "Eight"],
-  //   indexOfCorrectAns: 2,
-  // },
-  // {
-  //   question: "Who painted the Mona Lisa?",
-  //   answers: [
-  //     "Vincent Van Gogh",
-  //     "Pablo Picasso",
-  //     "Leonardo da Vinci",
-  //     "Michelangelo",
-  //   ],
-  //   indexOfCorrectAns: 2,
-  // },
-  // {
-  //   question:
-  //     "Which gas do plants absorb from the atmosphere during photosynthesis?",
-  //   answers: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
-  //   indexOfCorrectAns: 2,
-  // },
-  // {
-  //   question: "What is the capital of Japan?",
-  //   answers: ["Seoul", "Beijing", "Tokyo", "Bangkok"],
-  //   indexOfCorrectAns: 2,
-  // },
+  {
+    question: "Which planet is known as the Red Planet?",
+    answers: ["Earth", "Mars", "Jupiter", "Venus"],
+    indexOfCorrectAns: 1,
+  },
+  {
+    question: "What is the largest ocean on Earth?",
+    answers: ["Atlantic", "Indian", "Pacific", "Arctic"],
+    indexOfCorrectAns: 2,
+  },
+  {
+    question: "In which year did the Titanic sink?",
+    answers: ["1912", "1915", "1920", "1905"],
+    indexOfCorrectAns: 0,
+  },
+  {
+    question: "What is the chemical symbol for water?",
+    answers: ["O2", "H2O", "CO2", "NaCl"],
+    indexOfCorrectAns: 1,
+  },
+  {
+    question: "How many continents are there on Earth?",
+    answers: ["Five", "Six", "Seven", "Eight"],
+    indexOfCorrectAns: 2,
+  },
+  {
+    question: "Who painted the Mona Lisa?",
+    answers: [
+      "Vincent Van Gogh",
+      "Pablo Picasso",
+      "Leonardo da Vinci",
+      "Michelangelo",
+    ],
+    indexOfCorrectAns: 2,
+  },
+  {
+    question:
+      "Which gas do plants absorb from the atmosphere during photosynthesis?",
+    answers: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    indexOfCorrectAns: 2,
+  },
+  {
+    question: "What is the capital of Japan?",
+    answers: ["Seoul", "Beijing", "Tokyo", "Bangkok"],
+    indexOfCorrectAns: 2,
+  },
 ];
 
 const quiz = new Quiz(questions);
