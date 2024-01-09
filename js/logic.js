@@ -97,73 +97,16 @@ class Quiz {
   }
 }
 
-const questions = [
-  {
-    question: "What is 2 + 2?",
-    answers: ["3", "4", "5", "6"],
-    indexOfCorrectAns: 1,
-  },
-  {
-    question: "Who wrote 'Hamlet'?",
-    answers: [
-      "Charles Dickens",
-      "J.K. Rowling",
-      "William Shakespeare",
-      "Leo Tolstoy",
-    ],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question: "Which planet is known as the Red Planet?",
-    answers: ["Earth", "Mars", "Jupiter", "Venus"],
-    indexOfCorrectAns: 1,
-  },
-  {
-    question: "What is the largest ocean on Earth?",
-    answers: ["Atlantic", "Indian", "Pacific", "Arctic"],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question: "In which year did the Titanic sink?",
-    answers: ["1912", "1915", "1920", "1905"],
-    indexOfCorrectAns: 0,
-  },
-  {
-    question: "What is the chemical symbol for water?",
-    answers: ["O2", "H2O", "CO2", "NaCl"],
-    indexOfCorrectAns: 1,
-  },
-  {
-    question: "How many continents are there on Earth?",
-    answers: ["Five", "Six", "Seven", "Eight"],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question: "Who painted the Mona Lisa?",
-    answers: [
-      "Vincent Van Gogh",
-      "Pablo Picasso",
-      "Leonardo da Vinci",
-      "Michelangelo",
-    ],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question:
-      "Which gas do plants absorb from the atmosphere during photosynthesis?",
-    answers: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
-    indexOfCorrectAns: 2,
-  },
-  {
-    question: "What is the capital of Japan?",
-    answers: ["Seoul", "Beijing", "Tokyo", "Bangkok"],
-    indexOfCorrectAns: 2,
-  },
-];
+async function main() {
+  let questions;
 
-const quiz = new Quiz(questions);
+  await fetch("api/questions")
+    .then((response) => response.json())
+    .then((data) => (questions = JSON.parse(data)))
+    .catch((error) => console.error("Error fetching questions:", error));
 
-document.addEventListener("DOMContentLoaded", function () {
+  const quiz = new Quiz(questions);
+
   const submitButton = document.getElementById("submitQuestion");
   submitButton.textContent = START_QUIZ;
 
@@ -182,4 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     selectedAnswer ? quiz.guess(selectedAnswer) : null;
   });
-});
+}
+
+main();
