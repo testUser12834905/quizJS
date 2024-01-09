@@ -42,7 +42,7 @@ class Quiz {
   }
 
   guess(answer) {
-    if (this.isCorrectAnswer(answer)) {
+    if (this.isAnswerCorrect(answer)) {
       this.score++;
     }
     this.currentQuestionIndex++;
@@ -52,36 +52,51 @@ class Quiz {
 
   updateUI() {
     if (this.hasEnded()) {
-      const resultElement = document.getElementById("result");
-      resultElement.style.display = "block";
-      resultElement.textContent = `Your score is: ${this.score}`;
+      this.uiDisplayResult();
 
-      const questionElement = document.getElementById("question");
-      questionElement.style.display = "none";
+      this.uiRemoveQuestions();
 
       const submitButton = document.getElementById("submitQuestion");
       submitButton.textContent = RESTART_QUIZ;
     } else {
-      const optionsGrid = document.querySelector(".options-grid");
-      optionsGrid.innerHTML = "";
-
-      const currentQuestion = this.getCurrentQuestion();
-
-      const questionElement = document.querySelector("#question > p");
-      questionElement.textContent = currentQuestion.question;
-
-      currentQuestion.answers.forEach((answer, index) => {
-        optionsGrid.appendChild(createOptionElement(answer, index));
-      });
-      const currentQuestionTracker = document.createElement("p");
-      currentQuestionTracker.textContent = `${this.currentQuestionIndex + 1}/${
-        this.questions.length
-      }`;
-      optionsGrid.appendChild(currentQuestionTracker);
+      this.uiDisplayAnswerSelection();
     }
   }
 
-  isCorrectAnswer(answer) {
+  uiDisplayAnswerSelection() {
+    const optionsGrid = document.querySelector(".options-grid");
+    optionsGrid.innerHTML = "";
+
+    const currentQuestion = this.getCurrentQuestion();
+
+    const questionElement = document.querySelector("#question > p");
+    questionElement.textContent = currentQuestion.question;
+
+    currentQuestion.answers.forEach((answer, index) => {
+      optionsGrid.appendChild(createOptionElement(answer, index));
+    });
+
+    const currentQuestionTracker = document.createElement("p");
+
+    currentQuestionTracker.textContent = `${this.currentQuestionIndex + 1}/${
+      this.questions.length
+    }`;
+
+    optionsGrid.appendChild(currentQuestionTracker);
+  }
+
+  uiDisplayResult() {
+    const resultElement = document.getElementById("result");
+    resultElement.style.display = "block";
+    resultElement.textContent = `Your score is: ${this.score}`;
+  }
+
+  uiRemoveQuestions() {
+    const questionElement = document.getElementById("question");
+    questionElement.style.display = "none";
+  }
+
+  isAnswerCorrect(answer) {
     const currentQuestion = this.getCurrentQuestion();
     return (
       answer === currentQuestion.answers[currentQuestion.indexOfCorrectAns]
