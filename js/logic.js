@@ -2,26 +2,6 @@ const START_QUIZ = "Start Quiz";
 const RESTART_QUIZ = "Restart Quiz";
 const SUBMIT_ANSWER = "Submit Answer";
 
-function createOptionElement(answer, index) {
-  const optionDiv = document.createElement("div");
-  optionDiv.className = "option";
-
-  const input = document.createElement("input");
-  input.type = "radio";
-  input.id = `ans${index}`;
-  input.value = answer;
-  input.name = "answer";
-
-  const label = document.createElement("label");
-  label.htmlFor = input.id;
-  label.textContent = answer;
-
-  optionDiv.appendChild(input);
-  optionDiv.appendChild(label);
-
-  return optionDiv;
-}
-
 class Quiz {
   constructor(questions) {
     this.score = 0;
@@ -140,6 +120,26 @@ async function main() {
 
     selectedAnswer ? quiz.guess(selectedAnswer) : null;
   });
+}
+
+function createOptionElement(answer, index) {
+  const optionDiv = document.createElement("div");
+  optionDiv.className = "option";
+
+  const input = document.createElement("input");
+  input.type = "radio";
+  input.id = `ans${index}`;
+  input.value = answer;
+  input.name = "answer";
+
+  const label = document.createElement("label");
+  label.htmlFor = input.id;
+  label.textContent = answer;
+
+  optionDiv.appendChild(input);
+  optionDiv.appendChild(label);
+
+  return optionDiv;
 }
 
 main();
